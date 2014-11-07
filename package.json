@@ -1,0 +1,30 @@
+{
+  "name": "openassets",
+  "version": "0.1.0",
+  "description": "JavaScript reference implementation of the Open Assets Protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewfhart/openassets"
+  },
+  "keywords": [
+    "Open",
+    "Assets",
+    "Protocol",
+    "OAP",
+    "Colored",
+    "Coins",
+    "Blockchain",
+    "Smart",
+    "Property"
+  ],
+  "author": "Andrew Hart <andrew@datafluency.com>",
+  "license": "Apache Software License Version 2",
+  "bugs": {
+    "url": "https://github.com/andrewfhart/openassets/issues"
+  },
+  "homepage": "https://github.com/andrewfhart/openassets"
+}
