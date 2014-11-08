@@ -31,9 +31,11 @@
     "assert": "^1.1.2",
     "chai": "^1.9.2",
     "mocha": "^2.0.1",
-    "should": "^4.2.1"
+    "should": "^4.2.1",
+    "sinon": "^1.11.1"
   },
   "dependencies": {
+    "bufferput": "^0.1.2",
     "leb": "^0.3.0"
   }
 }
