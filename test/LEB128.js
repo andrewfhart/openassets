@@ -4,10 +4,11 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'test';
 
-var should = require('should'),
-    assert = require('assert'),
+var assert = require('assert'),
     chai   = require('chai'),
     expect = chai.expect,
+    should = chai.should(),
+    sinon  = require('sinon'),
     LEB128 = require('../lib/protocol/LEB128');
 
 describe("LEB128 Encoder/Decoder", function () {
