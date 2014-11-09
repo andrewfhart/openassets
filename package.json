@@ -35,6 +35,7 @@
     "sinon": "^1.11.1"
   },
   "dependencies": {
+    "bitcore": "^0.1.39",
     "bufferput": "^0.1.2",
     "leb": "^0.3.0"
   }
