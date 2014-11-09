@@ -173,4 +173,47 @@ describe("MarkerOutput", function () {
 
   });
 
+  describe('::parseScript', function () {
+
+    var mo, buf;
+
+    beforeEach(function () {
+      mo  = new MarkerOutput([1, 300, 624485], Buffer('metadata','ascii'));
+      buf = mo.buildScript(mo.serializePayload());
+    });
+
+    it('should fail if it is not an OP_RETURN script', function (done) {
+      var test = Buffer.concat([Buffer([0x00]), buf.slice(1)]); // replace 1st byte with 0x00
+      mo.parseScript(test).should.equal(false);
+      done();
+    });
+
+    it('should fail if there is no payload after the opcode', function (done) {
+      var test = Buffer([0x6a]);  // Just OP_RETURN, nothing else
+      mo.parseScript(test).should.equal(false);
+      done();
+    });
+
+    it('should fail if the payload does not start with the Open Assets tag', function (done) {
+      var test = Buffer([0x6a, 0x14, 0x00, 0x00]); // OP_RETURN, PUSHDATA 20 bytes, no OA tag
+      mo.parseScript(test).should.equal(false);
+      done();
+    });
+
+    it ('should correctly extract asset quantities', function (done) {
+      var test = mo.parseScript(buf);
+      mo.deserializePayload(test).assetQuantities.should.deep.equal([1, 300, 624485]);
+      done();
+    });
+
+    it ('should correctly extract metadata', function (done) {
+      var test = mo.parseScript(buf);
+      mo.deserializePayload(test).metadata.toString('ascii').should.equal('metadata');
+      done();
+    });
+
+  });
+
+
+
 });
