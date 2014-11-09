@@ -127,7 +127,46 @@ describe("MarkerOutput", function () {
     });
 
     it('should fail if not given a valid payload', function (done) {
-      var fn = function () {MarkerOutput.deserializePayload('asdfjkl;');};
+      var fn = function () {mo.deserializePayload('asdfjkl;');};
+      expect(fn).to.throw(Error);
+      done();
+    });
+
+  });
+
+  describe('::buildScript', function () {
+
+    var mo, buf, sb, bs;
+
+    beforeEach(function () {
+      mo   = new MarkerOutput([1, 300, 624485], Buffer('metadata','ascii'));
+      buf  = mo.serializePayload(); // 20 bytes
+      sb   = mo.buildScript(buf);   // 22 bytes
+      bs   = [].slice.call(sb);
+    });
+
+    it('should build an output script with the OP_RETURN opcode', function (done) {
+      bs.slice(0,1).should.deep.equal([0x6a]);  // OP_RETURN (106)
+      done();
+    });
+
+    it('should apply the correct PUSHDATA opcode for the data length', function (done) {
+      bs.slice(1,2).should.deep.equal([0x14]);  // 20 byte payload
+      done();
+    });
+
+    it('should have the correct length', function (done) {
+      bs.length.should.equal(buf.length + 2); //(RETURN + PUSHDATA + buf (20 byte payload))
+      done();
+    });
+
+    it('should include the serialized payload', function (done) {
+      Buffer(bs.slice(2,22)).should.deep.equal(buf);
+      done();
+    });
+
+    it('should fail if not given a valid payload', function (done) {
+      var fn = function () {mo.buildScript('asdfjkl;');};
       expect(fn).to.throw(Error);
       done();
     });
