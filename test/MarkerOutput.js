@@ -51,6 +51,7 @@ describe("MarkerOutput", function () {
     });
   });
 
+
   describe('::serializePayload', function () {
 
     var mo, buf, bs;
@@ -103,8 +104,34 @@ describe("MarkerOutput", function () {
         [0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61]);  // 'metadata'.length = 8
       done();
     });
-
   });
 
+  describe('::deserializePayload', function () {
+
+    var mo, buf, data;
+
+    beforeEach(function () {
+      mo   = new MarkerOutput([1, 300, 624485], Buffer('metadata','ascii'));
+      buf  = mo.serializePayload();
+      data = mo.deserializePayload(buf);
+    });
+
+    it('should recover each asset quantity', function (done) {
+      data.assetQuantities.should.deep.equal([1, 300, 624485]);
+      done();
+    });
+
+    it('should recover the content of the metadata', function (done) {
+      data.metadata.toString('ascii').should.equal('metadata');
+      done();
+    });
+
+    it('should fail if not given a valid payload', function (done) {
+      var fn = function () {MarkerOutput.deserializePayload('asdfjkl;');};
+      expect(fn).to.throw(Error);
+      done();
+    });
+
+  });
 
 });
