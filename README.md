@@ -1,4 +1,4 @@
 openassets
 ==========
 
-JavaScript reference implementation of the Open Assets Protocol
+A JavaScript implementation of the [Open Assets Protocol](https://github.com/OpenAssets/open-assets-protocol).
