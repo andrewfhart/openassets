@@ -1,7 +1,7 @@
 {
   "name": "openassets",
-  "version": "0.1.0",
-  "description": "JavaScript reference implementation of the Open Assets Protocol",
+  "version": "0.0.0",
+  "description": "JavaScript implementation of the Open Assets Protocol",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,7 +21,7 @@
     "Smart",
     "Property"
   ],
-  "author": "Andrew Hart <andrew@datafluency.com>",
+  "author": "Andrew Hart <hello@andrewfhart.com>",
   "license": "Apache Software License Version 2",
   "bugs": {
     "url": "https://github.com/andrewfhart/openassets/issues"
