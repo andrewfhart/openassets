@@ -35,9 +35,9 @@ describe("TransactionOutput", function () {
     it('should apply defaults if only given a value', function (done) {
       var to = new TransactionOutput(value);
       to.value.should.equal(value);
-      to.script.should.deep.equal(Buffer([]));
-      to.assetId.should.deep.equal(Buffer([]));
-      to.assetQuantity.should.equal(0);
+      expect(to.script).to.be.null;
+      expect(to.assetId).to.be.null;
+      expect(to.assetId).to.be.null;
       to.outputType.should.equal(OutputType.UNCOLORED);
       done();
     });
@@ -97,7 +97,7 @@ describe("TransactionOutput", function () {
     it('should generate a string representation of a default TransactionOutput', function (done) {
       to = new TransactionOutput();
       expect(to.toString()).to.equal(
-        'TransactionOutput(value=-1, script=, assetId=, assetQuantity=0, outputType=UNCOLORED)');
+        'TransactionOutput(value=null, script=null, assetId=null, assetQuantity=null, outputType=UNCOLORED)');
       done();
     });
 
