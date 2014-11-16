@@ -167,7 +167,6 @@ describe("TransactionOutput", function () {
   });
 
 
-/*
   describe('::getOutput', function () {
 
     var txFunding, txIssue1, txIssue2, txXfer1, txXfer2, txXfer3,
@@ -238,7 +237,7 @@ describe("TransactionOutput", function () {
       async.series([
         // Open Assets Issuance output
         function (cb) {
-          ce.getOutput(txIssue, 0, function (err, data) {
+          ce.getOutput(txIssue1, 0, function (err, data) {
             expect(err).to.not.exist;
             expect(data.toString()).to.equal(
               'TransactionOutput(value=600, script=0x76a914d717483b5554670550f8e79a3b958d294ecf806088ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=1, outputType=ISSUANCE)');
@@ -247,7 +246,7 @@ describe("TransactionOutput", function () {
         },
         // Open Assets Marker output
         function (cb) {
-          ce.getOutput(txIssue, 1, function (err, data) {
+          ce.getOutput(txIssue1, 1, function (err, data) {
             expect(err).to.not.exist;
             expect(data.toString()).to.equal(
               'TransactionOutput(value=0, script=0x6a224f41010001011b753d68747470733a2f2f6370722e736d2f63463557584459643642, assetId=null, assetQuantity=null, outputType=MARKER_OUTPUT)');
@@ -295,7 +294,7 @@ describe("TransactionOutput", function () {
         },
         // Open Assets Transfer output
         function (cb) {
-          ce.getOutput(txXfer3, 1, function (err, data) {
+          ce.getOutput(txXfer2, 1, function (err, data) {
             expect(err).to.not.exist;
             expect(data.toString()).to.equal(
               'TransactionOutput(value=600, script=0x76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=1, outputType=TRANSFER)');
@@ -305,9 +304,8 @@ describe("TransactionOutput", function () {
       ],function () {done();});
     });
 
-
   });
-*/
+
 
 
   describe('::hashScript', function () {
