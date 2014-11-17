@@ -154,7 +154,7 @@ describe("TransactionOutput", function () {
           s: new Buffer('6a074f410100010100','hex')},
         { v: new Buffer('5802000000000000','hex'),
           s: new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex')},
-        { v: new Buffer('2836010000000000','hex'),
+        { v: new Buffer('905f010000000000','hex'),
           s: new Buffer('76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac','hex')}
       ];
       assetQuantities = [1];
