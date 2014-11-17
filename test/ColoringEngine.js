@@ -300,6 +300,29 @@ describe("TransactionOutput", function () {
       ],function () {done();});
     });
 
+    it('should detect an Open Assets issuance transaction output', function (done) {
+      async.series([
+        // Open Assets Issuance output
+        function (cb) {
+          ce.getOutput(txIssue2, 0, function (err, data) {
+            expect(err).to.not.exist;
+            expect(data.toString()).to.equal(
+              'TransactionOutput(value=600, script=0x76a914d717483b5554670550f8e79a3b958d294ecf806088ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=200, outputType=ISSUANCE)');
+            cb();
+          });
+        },
+        // Open Assets Marker output
+        function (cb) {
+          ce.getOutput(txIssue2, 1, function (err, data) {
+            expect(err).to.not.exist;
+            expect(data.toString()).to.equal(
+              'TransactionOutput(value=0, script=0x6a234f41010001c8011b753d68747470733a2f2f6370722e736d2f63463557584459643642, assetId=null, assetQuantity=null, outputType=MARKER_OUTPUT)');
+            cb();
+          });
+        }
+      ],function () {done();});
+    });
+
     it('should detect an Open Assets transfer transaction output', function (done) {
       this.timeout(5000);
       async.series([
@@ -317,12 +340,60 @@ describe("TransactionOutput", function () {
           ce.getOutput(txXfer2, 1, function (err, data) {
             expect(err).to.not.exist;
             expect(data.toString()).to.equal(
-              'TransactionOutput(value=600, script=0x76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=1, outputType=TRANSFER)');
+              'TransactionOutput(value=600, script=0x76a914d717483b5554670550f8e79a3b958d294ecf806088ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=1, outputType=TRANSFER)');
             cb();
           });
         }
       ],function () {done();});
     });
+
+    it('should detect an Open Assets transfer transaction output with "asset change"', function (done) {
+      this.timeout(5000);
+      async.series([
+        // Open Assets Marker output
+        function (cb) {
+          ce.getOutput(txXfer3, 0, function (err, data) {
+            expect(err).to.not.exist;
+            expect(data.toString()).to.equal(
+              'TransactionOutput(value=0, script=0x6a094f4101000202c70100, assetId=null, assetQuantity=null, outputType=MARKER_OUTPUT)');
+            cb();
+          });
+        },
+        // Open Assets Transfer output (Transfer 1 units from tx 56a...18c and 1 unit from tx dcc...69d to 1BjGFM...)
+        function (cb) {
+          ce.getOutput(txXfer3, 1, function (err, data) {
+            expect(err).to.not.exist;
+            expect(data.toString()).to.equal(
+              'TransactionOutput(value=600, script=0x76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=2, outputType=TRANSFER)');
+            cb();
+          });
+        },
+        // Open Assets Transfer output (Transfer the remaining 199 units from tx dcc...69d back to the 1LcJAv...)
+        function (cb) {
+          ce.getOutput(txXfer3, 2, function (err, data) {
+            expect(err).to.not.exist;
+            expect(data.toString()).to.equal(
+              'TransactionOutput(value=600, script=0x76a914d717483b5554670550f8e79a3b958d294ecf806088ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=199, outputType=TRANSFER)');
+            cb();
+          });
+        },
+        // Transfer output (technically "uncolored" since there is no asset id - this is just a "change" output)
+        function (cb) {
+          ce.getOutput(txXfer3, 3, function (err, data) {
+            expect(err).to.not.exist;
+            expect(data.assetId).to.be.null;
+            expect(data.assetQuantity).to.be.null;
+            data.value.should.equal(58800);
+            data.outputType.should.equal(OutputType.TRANSFER);
+            expect(data.toString()).to.equal(
+              'TransactionOutput(value=58800, script=0x76a914d717483b5554670550f8e79a3b958d294ecf806088ac, assetId=null, assetQuantity=null, outputType=TRANSFER)');
+            cb();
+          });
+        }
+      ],function () {done();});
+    });
+
+
 
   });
 
