@@ -1,6 +1,6 @@
 {
   "name": "openassets",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JavaScript implementation of the Open Assets Protocol",
   "main": "index.js",
   "scripts": {
