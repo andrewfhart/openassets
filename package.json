@@ -1,10 +1,10 @@
 {
   "name": "openassets",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "JavaScript implementation of the Open Assets Protocol",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: see README for instructions on running tests\" && exit 1"
   },
   "repository": {
     "type": "git",
