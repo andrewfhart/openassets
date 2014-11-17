@@ -72,7 +72,7 @@ describe("TransactionOutput", function () {
       assetQuantities = [1];
 
       result = ce._computeAssetIds(inputs, markerOutputIndex, outputs, assetQuantities);
-      result.length.should.equal(2);
+      result.length.should.equal(3);
 
       // Issuance output
       result[0].value.should.equal(600);
@@ -85,6 +85,13 @@ describe("TransactionOutput", function () {
       result[1].outputType.should.equal(OutputType.MARKER_OUTPUT);
       expect(result[1].assetId).to.be.null;
       result[1].toString().should.equal('TransactionOutput(value=0, script=0x6a224f41010001011b753d68747470733a2f2f6370722e736d2f63463557584459643642, assetId=null, assetQuantity=null, outputType=MARKER_OUTPUT)');
+
+      // Transfer output (technically "uncolored" since this there is no asset id - this is just a "change" output)
+      expect(result[2].assetId).to.be.null;
+      expect(result[2].assetQuantity).to.be.null;
+      result[2].value.should.equal(89400);
+      result[2].outputType.should.equal(OutputType.TRANSFER);
+
       done();
     });
 
@@ -109,7 +116,7 @@ describe("TransactionOutput", function () {
       assetQuantities = [1];
 
       result = ce._computeAssetIds(inputs, markerOutputIndex, outputs, assetQuantities);
-      result.length.should.equal(2);
+      result.length.should.equal(3);
 
       // Marker output
       result[0].value.should.equal(0);
@@ -122,6 +129,12 @@ describe("TransactionOutput", function () {
       result[1].outputType.should.equal(OutputType.TRANSFER);
       result[1].assetId.toString('hex').should.equal('1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0');
       result[1].toString().should.equal('TransactionOutput(value=600, script=0x76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=1, outputType=TRANSFER)');
+
+      // Transfer output (technically "uncolored" since this there is no asset id - this is just a "change" output)
+      expect(result[2].assetId).to.be.null;
+      expect(result[2].assetQuantity).to.be.null;
+      result[2].value.should.equal(79400);
+      result[2].outputType.should.equal(OutputType.TRANSFER);
 
       done();
     });
@@ -147,7 +160,7 @@ describe("TransactionOutput", function () {
       assetQuantities = [1];
 
       result = ce._computeAssetIds(inputs, markerOutputIndex, outputs, assetQuantities);
-      result.length.should.equal(2);
+      result.length.should.equal(3);
 
       // Marker output
       result[0].value.should.equal(0);
@@ -160,6 +173,12 @@ describe("TransactionOutput", function () {
       result[1].outputType.should.equal(OutputType.TRANSFER);
       result[1].assetId.toString('hex').should.equal('1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0');
       result[1].toString().should.equal('TransactionOutput(value=600, script=0x76a914d717483b5554670550f8e79a3b958d294ecf806088ac, assetId=0x1d27fd8fac0cda221b3fccc6ecc1fc46cd9178d0, assetQuantity=1, outputType=TRANSFER)');
+
+      // Transfer output (technically "uncolored" since this there is no asset id - this is just a "change" output)
+      expect(result[2].assetId).to.be.null;
+      expect(result[2].assetQuantity).to.be.null;
+      result[2].value.should.equal(90000);
+      result[2].outputType.should.equal(OutputType.TRANSFER);
 
       done();
     });
@@ -210,6 +229,7 @@ describe("TransactionOutput", function () {
       // Create an instance of the Coloring Engine
       ce = new ColoringEngine(getTransactionProvider(config));
     });
+
 
     it('should handle a non-Open Assets transaction given a valid hash', function (done) {
       this.timeout(5000);
