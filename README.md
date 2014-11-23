@@ -7,12 +7,12 @@ About the Open Assets Protocol
 ------------------------------
 The Open Assets Protocol is a simple and powerful protocol built on top of the Bitcoin Blockchain. It allows issuance and transfer of user-created assets. The Open Assets Protocol is an evolution of the concept of colored coins.
 
-The protocol specification is publicly maintained at the official [OpenAssets repository](https://github.com/OpenAssets/open-assets-protocol). The [reference implementation](https://github.com/OpenAssets/openassets) exists as a Python module. This project provides a translation to JavaScript, packaged as an NPM module.
+The protocol specification is publicly maintained at the official [OpenAssets repository](https://github.com/OpenAssets/open-assets-protocol). The [reference implementation](https://github.com/OpenAssets/openassets) exists as a Python module. This project provides a translation to JavaScript, packaged as an `npm` module.
 
 Installation
 ------------
 
-OpenAssets is provided as a [NPM](http://npmjs.org/) module for easy installation:
+OpenAssets is provided as an [npm](https://www.npmjs.org/package/openassets) module for easy installation:
 
 ```npm install openassets```
 
