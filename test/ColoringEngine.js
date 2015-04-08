@@ -407,4 +407,14 @@ describe("TransactionOutput", function () {
       done();
     });
   });
+
+  describe('::addressFromBitcoinAddress', function () {
+    it('should compute the OpenAsset address from a Bitcoin public address', function (done) {
+      var btcAddr = '16UwLL9Risc3QfPqBUvKofHmBQ7wMtjvM';
+      var oaAddr = new ColoringEngine().addressFromBitcoinAddress(btcAddr);
+      oaAddr.should.equal('akB4NBW9UuCmHuepksob6yfZs6naHtRCPNy');
+      done();
+    });
+  });
+
 });
