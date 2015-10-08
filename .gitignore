@@ -1,1 +1,28 @@
-node_modules
+/node_modules/*
+
+# IDE and editor specific files #
+#################################
+/nbproject
+*.iml
+.idea
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Eclipse IDE
+/.settings
+.project
+.buildpath
+
+# logfile
+/log
+/test/log
+/node_modules
