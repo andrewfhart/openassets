@@ -14,8 +14,8 @@ var assert = require('assert'),
     OutputType        = require('../lib/protocol/OutputType'),
     TransactionOutput = require('../lib/protocol/TransactionOutput'),
     bitcore = require('bitcore'),
-    RpcClient = require('bitcore/lib/RpcClient'),
-    EncodedData = require('bitcore/util/EncodedData');
+    Script  = require('bitcore/lib/script'),
+    RpcClient = require('bitcoind-rpc/lib');
 
 
 describe("TransactionOutput", function () {
@@ -62,12 +62,12 @@ describe("TransactionOutput", function () {
       ];
       markerOutputIndex=1;
       outputs = [
-        { v: new Buffer('5802000000000000','hex'),
-          s: new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex')},
-        { v: new Buffer('0000000000000000','hex'),
-          s: new Buffer('6a224f41010001011b753d68747470733a2f2f6370722e736d2f63463557584459643642','hex')},
-        { v: new Buffer('385d010000000000','hex'),
-          s: new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex')}
+        { satoshis: new Buffer('5802000000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex'))},
+        { satoshis: new Buffer('0000000000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('6a224f41010001011b753d68747470733a2f2f6370722e736d2f63463557584459643642','hex'))},
+        { satoshis: new Buffer('385d010000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex'))}
       ];
       assetQuantities = [1];
 
@@ -106,12 +106,12 @@ describe("TransactionOutput", function () {
       ];
       markerOutputIndex=0;
       outputs = [
-        { v: new Buffer('0000000000000000','hex'),
-          s: new Buffer('6a074f410100010100','hex')},
-        { v: new Buffer('5802000000000000','hex'),
-          s: new Buffer('76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac','hex')},
-        { v: new Buffer('2836010000000000','hex'),
-          s: new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex')}
+        { satoshis: new Buffer('0000000000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('6a074f410100010100','hex'))},
+        { satoshis: new Buffer('5802000000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac','hex'))},
+        { satoshis: new Buffer('2836010000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex'))}
       ];
       assetQuantities = [1];
 
@@ -150,12 +150,12 @@ describe("TransactionOutput", function () {
       ];
       markerOutputIndex=0;
       outputs = [
-        { v: new Buffer('0000000000000000','hex'),
-          s: new Buffer('6a074f410100010100','hex')},
-        { v: new Buffer('5802000000000000','hex'),
-          s: new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex')},
-        { v: new Buffer('905f010000000000','hex'),
-          s: new Buffer('76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac','hex')}
+        { satoshis: new Buffer('0000000000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('6a074f410100010100','hex'))},
+        { satoshis: new Buffer('5802000000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('76a914d717483b5554670550f8e79a3b958d294ecf806088ac','hex'))},
+        { satoshis: new Buffer('905f010000000000','hex').readInt32LE(0),
+          script: new Script(new Buffer('76a91475c37d8aaeb2cd9859a7b212d21e422903cf00a288ac','hex'))}
       ];
       assetQuantities = [1];
 
